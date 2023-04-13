@@ -40,9 +40,12 @@ exports.handler = async function (event, context) {
         // By default uses arn
         const cName = clusterContext || arn;
         const cUser = clusterUser || arn;
-
+        console.log('Here 1')
         // Configure the k8s client using a Config Object, it will use the 'token' command of aws-iam-authenticator to retrieve the EKS token.
         const optionsConfig = getConfigForOptions(CLUSTER_NAME, REGION, arn, cName, cUser, certificateAuthority.data, endpoint, "Config", IAM_AUTH_PATH)
+        console.log('Made it')
+        console.log(optionsConfig);
+        console.log(optionsConfig.clusters[0].cluster);
         kc.loadFromOptions(optionsConfig);
         const client = k8s.KubernetesObjectApi.makeApiClient(kc);
 
@@ -111,6 +114,7 @@ exports.handler = async function (event, context) {
             const k8sApiCore = kc.makeApiClient(k8s.CoreV1Api);
 
             // List and Print Pod in the Namespace
+            console.log('Made it before listing')
             const readPods = await k8sApiCore.listNamespacedPod(namespace)
             const pods = readPods.body.items
             podsList = pods.map(pod => pod.metadata.name)

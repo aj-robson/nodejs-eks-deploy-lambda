@@ -13,13 +13,13 @@ function getUserConfig(clusterName, clusterUser, region, command) {
         name: clusterUser,
         user: {
             exec: {
-                apiVersion: "client.authentication.k8s.io/v1alpha1",
+                apiVersion: "client.authentication.k8s.io/v1beta1",
                 args: [
-                    "token",
-                    "--region",
-                    region,
-                    "-i",
-                    clusterName
+                    - "token"
+                    - "-i"
+                    - clusterName
+                    - "-r"
+                    - <ROLE_ARN>
                 ],
                 command
             }

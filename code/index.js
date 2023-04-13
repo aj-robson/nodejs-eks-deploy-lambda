@@ -32,7 +32,7 @@ exports.handler = async function (event) {
         
         // By default uses arn
         const cName = clusterContext || arn;
-        const cUser = clusterUser  || arn;
+        const cUser = '';
 
         // Configure the k8s client using a Config Object, it will use the 'token' command of aws-iam-authenticator to retrieve the EKS token.
         const optionsConfig = getConfigForOptions(CLUSTER_NAME, REGION, arn, cName, cUser, certificateAuthority.data, endpoint, "Config", IAM_AUTH_PATH)
